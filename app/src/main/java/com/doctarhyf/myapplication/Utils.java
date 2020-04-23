@@ -5,6 +5,7 @@ import android.os.Build;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.view.View;
+import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
 //import android.support.v4.app.FragmentTransaction;
@@ -68,9 +69,37 @@ public class Utils {
 
     }
 
-    public static void PlayClickAnimation(Context context, View view, int animRessourceId) {
-        view.startAnimation(AnimationUtils.loadAnimation(context, R.anim.zoom_animation));
+    public static void PlayClickAnimation(Context context, View view, int animRessourceId, IAnimListener iAnimListener) {
+        Animation animation = AnimationUtils.loadAnimation(context, R.anim.zoom_animation);
+        if(iAnimListener != null) {
+            animation.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {
+                    iAnimListener.onStart(animation);
+                }
+
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    iAnimListener.onEnd(animation);
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+                    iAnimListener.onRepeat(animation);
+                }
+            });
+        }
+
+        view.startAnimation(animation);
     }
 
 
+    public static interface IAnimListener {
+
+        void onStart(Animation animation);
+
+        void onEnd(Animation animation);
+
+        void onRepeat(Animation animation);
+    }
 }

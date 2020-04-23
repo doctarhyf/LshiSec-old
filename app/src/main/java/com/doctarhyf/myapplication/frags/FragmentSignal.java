@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -81,7 +82,7 @@ public class FragmentSignal extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Utils.PlayClickAnimation(getContext(), v, R.anim.zoom_animation);
+                Utils.PlayClickAnimation(getContext(), v, R.anim.zoom_animation, null);
                 mListener.onShowTabClicked(SectionsPagerAdapter.FRAG_HISTORY);
             }
         });
@@ -90,7 +91,7 @@ public class FragmentSignal extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Utils.PlayClickAnimation(getContext(), v, R.anim.zoom_animation);
+                Utils.PlayClickAnimation(getContext(), v, R.anim.zoom_animation, null);
                 mListener.onShowTabClicked(SectionsPagerAdapter.FRAG_MAP);
             }
         });
@@ -102,6 +103,24 @@ public class FragmentSignal extends Fragment {
             @Override
             public void onClick(View v) {
 
+
+
+                Utils.PlayClickAnimation(getContext(), v, R.anim.zoom_animation, new Utils.IAnimListener() {
+                    @Override
+                    public void onStart(Animation animation) {
+
+                    }
+
+                    @Override
+                    public void onEnd(Animation animation) {
+                        btnSignal.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.pulse));
+                    }
+
+                    @Override
+                    public void onRepeat(Animation animation) {
+
+                    }
+                });
                 mListener.onSignalInsecClicked(null);
             }
 
