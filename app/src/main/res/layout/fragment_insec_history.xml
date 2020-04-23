@@ -10,4 +10,7 @@
     android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
     tools:context=".frags.FragmentInsecHistory"
-    tools:listitem="@layout/fragment_insecsignal" />
+    tools:listitem="@layout/layout_item_insec_signal"
+    android:paddingTop="@dimen/default_top_padding"
+    android:background="@drawable/gradient_bg_insec_history"
+    />

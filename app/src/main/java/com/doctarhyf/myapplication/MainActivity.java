@@ -4,6 +4,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
+import com.doctarhyf.myapplication.frags.FragmentMap;
 import com.doctarhyf.myapplication.frags.FragmentSignal;
 import com.doctarhyf.myapplication.frags.FragmentInsecHistory;
 import com.doctarhyf.myapplication.frags.dummy.DummyContent;
@@ -23,10 +24,12 @@ import android.view.WindowManager;
 
 import com.doctarhyf.myapplication.ui.main.SectionsPagerAdapter;
 
-public class MainActivity extends AppCompatActivity implements FragmentSignal.OnFragmentInteractionListener, FragmentInsecHistory.OnListFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements FragmentSignal.OnFragmentInteractionListener, FragmentInsecHistory.OnListFragmentInteractionListener,
+        FragmentMap.OnFragmentInteractionListener {
 
     private static final String TAG = "TAG";
     private TabLayout mTabs = null;
+    private int mCurrentFragIdx = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,26 @@ public class MainActivity extends AppCompatActivity implements FragmentSignal.On
         mTabs = findViewById(R.id.tabs);
         mTabs.setVisibility(View.GONE);
         mTabs.setupWithViewPager(viewPager);
+
+        mTabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                mCurrentFragIdx = tab.getPosition();
+                Log.e(TAG, "onTabSelected: idx " + tab.getPosition() );
+                Log.e(TAG, "onBackPressed: curfidx : " + mCurrentFragIdx + ", FRAG_MAP : " + SectionsPagerAdapter.FRAG_MAP );
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
         FloatingActionButton fab = findViewById(R.id.fab);
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -48,32 +71,33 @@ public class MainActivity extends AppCompatActivity implements FragmentSignal.On
             }
         });
 
-
         Window window = getWindow();
-
-// clear FLAG_TRANSLUCENT_STATUS flag:
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-
-// add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-
-// finally change the color
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            window.setStatusBarColor(ContextCompat.getColor(this,R.color.my_statusbar_color));
-
-        }
+        window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
         showTab(SectionsPagerAdapter.FRAG_SIGNAL_INSEC);
     }
-
     public void showTab(int tabIdx){
         new Handler().postDelayed(
                 new Runnable(){
                     @Override
                     public void run() {
+
+                        mCurrentFragIdx = tabIdx;
                         mTabs.getTabAt(tabIdx).select();
+
+
                     }
                 }, 100);
+    }
+
+    private int getStatusBarCol(int tabIdx) {
+        int col = R.color.col_main_blue;
+
+        if(tabIdx == SectionsPagerAdapter.FRAG_HISTORY) col = R.color.col_grad_violet;
+        if(tabIdx == SectionsPagerAdapter.FRAG_SIGNAL_INSEC) col = R.color.col_main_blue;
+
+
+        return col;
     }
 
     @Override
@@ -89,5 +113,23 @@ public class MainActivity extends AppCompatActivity implements FragmentSignal.On
     @Override
     public void onInsecItemClicked(DummyContent.InsecSignal item) {
         Log.e(TAG, "onInsecItemClicked: -> " + item.toString() );
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+
+        if(mCurrentFragIdx == SectionsPagerAdapter.FRAG_MAP){
+            showTab(SectionsPagerAdapter.FRAG_SIGNAL_INSEC);
+        }else{
+            super.onBackPressed();
+        }
+
+        Log.e(TAG, "onBackPressed: curfidx : " + mCurrentFragIdx + ", FRAG_MAP : " + SectionsPagerAdapter.FRAG_MAP );
     }
 }

@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.doctarhyf.myapplication.R;
+import com.doctarhyf.myapplication.frags.FragmentMap;
 import com.doctarhyf.myapplication.frags.FragmentSignal;
 import com.doctarhyf.myapplication.frags.FragmentInsecHistory;
 
@@ -45,6 +46,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
                 break;
 
             case FRAG_MAP:
+                fragment = FragmentMap.newInstance("","");
                 break;
         }
 

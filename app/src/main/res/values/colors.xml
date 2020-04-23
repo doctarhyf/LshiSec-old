@@ -3,8 +3,10 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="my_statusbar_color">#32bcfd</color>
+    <color name="col_main_blue">#32bcfd</color>
     <color name="col_dark_blue">#256bf5</color>
     <color name="light_blue">#66c2fb</color>
     <color name="white">#fff</color>
+    <color name="col_grad_violet">#c90496</color>
+    <color name="grad_pink">#d73928</color>
 </resources>

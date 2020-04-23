@@ -31,7 +31,7 @@ public class AdapterInsecSignal extends RecyclerView.Adapter<AdapterInsecSignal.
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_insecsignal, parent, false);
+                .inflate(R.layout.layout_item_insec_signal, parent, false);
         return new ViewHolder(view);
     }
 

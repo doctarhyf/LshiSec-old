@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_bg_main"
-    tools:context=".frags.FragmentSignal">
+    tools:context=".frags.FragmentSignal"
+    android:paddingTop="@dimen/default_top_padding"
+    >
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
