@@ -1,12 +1,15 @@
 package com.doctarhyf.myapplication;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+
+import com.google.android.material.snackbar.Snackbar;
 
 //import android.support.v4.app.FragmentTransaction;
 //import android.support.v7.app.AlertDialog;
@@ -91,6 +94,12 @@ public class Utils {
         }
 
         view.startAnimation(animation);
+    }
+
+    public static void showSnackWithViewMsgBgColor(View view, String msg, int length, int bgColor) {
+        Snackbar snackbar = Snackbar.make(view, msg, Snackbar.LENGTH_SHORT);
+        snackbar.getView().setBackgroundColor(bgColor);
+        snackbar.show();
     }
 
 

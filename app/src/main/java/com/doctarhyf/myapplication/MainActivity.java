@@ -1,5 +1,6 @@
 package com.doctarhyf.myapplication;
 
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
@@ -30,11 +32,15 @@ public class MainActivity extends AppCompatActivity implements FragmentSignal.On
     private static final String TAG = "TAG";
     private TabLayout mTabs = null;
     private int mCurrentFragIdx = -1;
+    private View mRootView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mRootView = findViewById(R.id.root);
+
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
         ViewPager viewPager = findViewById(R.id.view_pager);
         viewPager.setAdapter(sectionsPagerAdapter);
@@ -103,6 +109,63 @@ public class MainActivity extends AppCompatActivity implements FragmentSignal.On
     @Override
     public void onSignalInsecClicked(Uri uri) {
         Log.e(TAG, "onSignalInsecClicked: " );
+
+
+        startRecording();
+
+
+    }
+
+    private boolean mRecordingInsecAudio =false;
+
+    private void startRecording() {
+
+        if( mRecordingInsecAudio ){
+
+            Utils.showSnackWithViewMsgBgColor(mRootView, "Audio already recording!", Snackbar.LENGTH_SHORT, Color.RED);
+            return;
+        }
+
+        mRecordingInsecAudio = true;
+        Utils.showSnackWithViewMsgBgColor(mRootView, "Recording insecurity audio ...", Snackbar.LENGTH_SHORT, Color.GREEN);
+        new CountDownTimer(5000, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+
+            }
+
+            @Override
+            public void onFinish() {
+                mRecordingInsecAudio = false;
+
+                startUploadingAudio();
+            }
+        }.start();
+    }
+
+    private boolean mUploadingAudio = false;
+
+    private void startUploadingAudio() {
+
+        if(mUploadingAudio){
+            Utils.showSnackWithViewMsgBgColor(mRootView, "Audio already uploading!", Snackbar.LENGTH_SHORT, Color.rgb(255,0,255));
+            return;
+        }
+
+        mUploadingAudio = true;
+        Utils.showSnackWithViewMsgBgColor(mRootView, "Recording finished! Transfering to server ...", Snackbar.LENGTH_SHORT, Color.YELLOW);
+        new CountDownTimer(3000, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+
+            }
+
+            @Override
+            public void onFinish() {
+                mUploadingAudio = false;
+                Utils.showSnackWithViewMsgBgColor(mRootView, "Audio Upload finished!", Snackbar.LENGTH_SHORT, Color.GREEN);
+            }
+        }.start();
     }
 
     @Override
