@@ -5,6 +5,8 @@ import android.os.Build;
 import android.os.Bundle;
 
 import com.doctarhyf.myapplication.frags.FragmentSignal;
+import com.doctarhyf.myapplication.frags.InsecSignalFragment;
+import com.doctarhyf.myapplication.frags.dummy.DummyContent;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
@@ -23,7 +25,7 @@ import android.view.WindowManager;
 
 import com.doctarhyf.myapplication.ui.main.SectionsPagerAdapter;
 
-public class MainActivity extends AppCompatActivity implements FragmentSignal.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements FragmentSignal.OnFragmentInteractionListener, InsecSignalFragment.OnListFragmentInteractionListener {
 
     private static final String TAG = "TAG";
     private TabLayout mTabs = null;
@@ -84,5 +86,10 @@ public class MainActivity extends AppCompatActivity implements FragmentSignal.On
     @Override
     public void onShowTabClicked(int fragIdx) {
         showTab(fragIdx);
+    }
+
+    @Override
+    public void onListFragmentInteraction(DummyContent.DummyItem item) {
+        Log.e(TAG, "onListFragmentInteraction: -> " + item.toString() );
     }
 }

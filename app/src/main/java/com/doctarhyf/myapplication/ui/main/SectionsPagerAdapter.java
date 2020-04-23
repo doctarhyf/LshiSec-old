@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.doctarhyf.myapplication.R;
 import com.doctarhyf.myapplication.frags.FragmentSignal;
+import com.doctarhyf.myapplication.frags.InsecSignalFragment;
 
 import java.lang.reflect.Array;
 
@@ -38,6 +39,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         switch (position){
             case FRAG_HISTORY:
+                fragment = InsecSignalFragment.newInstance(1);
                 break;
 
             case FRAG_SIGNAL_INSEC:
