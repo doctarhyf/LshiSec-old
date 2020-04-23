@@ -8,23 +8,23 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.doctarhyf.myapplication.R;
-import com.doctarhyf.myapplication.frags.InsecSignalFragment.OnListFragmentInteractionListener;
-import com.doctarhyf.myapplication.frags.dummy.DummyContent.DummyItem;
+import com.doctarhyf.myapplication.frags.FragmentInsecHistory.OnListFragmentInteractionListener;
+import com.doctarhyf.myapplication.frags.dummy.DummyContent.InsecSignal;
 
 import java.util.List;
 
 /**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
+ * {@link RecyclerView.Adapter} that can display a {@link InsecSignal} and makes a call to the
  * specified {@link OnListFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
 public class AdapterInsecSignal extends RecyclerView.Adapter<AdapterInsecSignal.ViewHolder> {
 
-    private final List<DummyItem> mValues;
+    private final List<InsecSignal> mInsecSignalList;
     private final OnListFragmentInteractionListener mListener;
 
-    public AdapterInsecSignal(List<DummyItem> items, OnListFragmentInteractionListener listener) {
-        mValues = items;
+    public AdapterInsecSignal(List<InsecSignal> items, OnListFragmentInteractionListener listener) {
+        mInsecSignalList = items;
         mListener = listener;
     }
 
@@ -37,9 +37,9 @@ public class AdapterInsecSignal extends RecyclerView.Adapter<AdapterInsecSignal.
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+        holder.mItem = mInsecSignalList.get(position);
+        holder.mIdView.setText(mInsecSignalList.get(position).id);
+        holder.mContentView.setText(mInsecSignalList.get(position).content);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,7 +47,7 @@ public class AdapterInsecSignal extends RecyclerView.Adapter<AdapterInsecSignal.
                 if (null != mListener) {
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
-                    mListener.onListFragmentInteraction(holder.mItem);
+                    mListener.onInsecItemClicked(holder.mItem);
                 }
             }
         });
@@ -55,14 +55,14 @@ public class AdapterInsecSignal extends RecyclerView.Adapter<AdapterInsecSignal.
 
     @Override
     public int getItemCount() {
-        return mValues.size();
+        return mInsecSignalList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
         public final TextView mIdView;
         public final TextView mContentView;
-        public DummyItem mItem;
+        public InsecSignal mItem;
 
         public ViewHolder(View view) {
             super(view);

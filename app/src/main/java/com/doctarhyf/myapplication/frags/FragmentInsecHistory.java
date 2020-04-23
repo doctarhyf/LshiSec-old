@@ -14,9 +14,7 @@ import android.view.ViewGroup;
 
 import com.doctarhyf.myapplication.R;
 import com.doctarhyf.myapplication.frags.dummy.DummyContent;
-import com.doctarhyf.myapplication.frags.dummy.DummyContent.DummyItem;
-
-import java.util.List;
+import com.doctarhyf.myapplication.frags.dummy.DummyContent.InsecSignal;
 
 /**
  * A fragment representing a list of Items.
@@ -24,7 +22,7 @@ import java.util.List;
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
-public class InsecSignalFragment extends Fragment {
+public class FragmentInsecHistory extends Fragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
@@ -36,13 +34,13 @@ public class InsecSignalFragment extends Fragment {
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public InsecSignalFragment() {
+    public FragmentInsecHistory() {
     }
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static InsecSignalFragment newInstance(int columnCount) {
-        InsecSignalFragment fragment = new InsecSignalFragment();
+    public static FragmentInsecHistory newInstance(int columnCount) {
+        FragmentInsecHistory fragment = new FragmentInsecHistory();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
@@ -61,7 +59,7 @@ public class InsecSignalFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_insecsignal_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_insec_history, container, false);
 
         // Set the adapter
         if (view instanceof RecyclerView) {
@@ -107,6 +105,6 @@ public class InsecSignalFragment extends Fragment {
      */
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
+        void onInsecItemClicked(InsecSignal item);
     }
 }

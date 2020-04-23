@@ -5,7 +5,7 @@ import android.os.Build;
 import android.os.Bundle;
 
 import com.doctarhyf.myapplication.frags.FragmentSignal;
-import com.doctarhyf.myapplication.frags.InsecSignalFragment;
+import com.doctarhyf.myapplication.frags.FragmentInsecHistory;
 import com.doctarhyf.myapplication.frags.dummy.DummyContent;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -17,15 +17,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Handler;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
 import com.doctarhyf.myapplication.ui.main.SectionsPagerAdapter;
 
-public class MainActivity extends AppCompatActivity implements FragmentSignal.OnFragmentInteractionListener, InsecSignalFragment.OnListFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements FragmentSignal.OnFragmentInteractionListener, FragmentInsecHistory.OnListFragmentInteractionListener {
 
     private static final String TAG = "TAG";
     private TabLayout mTabs = null;
@@ -89,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements FragmentSignal.On
     }
 
     @Override
-    public void onListFragmentInteraction(DummyContent.DummyItem item) {
-        Log.e(TAG, "onListFragmentInteraction: -> " + item.toString() );
+    public void onInsecItemClicked(DummyContent.InsecSignal item) {
+        Log.e(TAG, "onInsecItemClicked: -> " + item.toString() );
     }
 }
