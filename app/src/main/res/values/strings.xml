@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Lshisec</string>
+    <string name="tab_text_history">History</string>
+    <string name="tab_text_signal">Signal</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="tab_text_map">Map</string>
+    <string name="tap_to_signal_insecurity">Tap to signal Insecurity</string>
+</resources>
