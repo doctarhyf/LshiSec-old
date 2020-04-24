@@ -1,5 +1,7 @@
 package com.doctarhyf.myapplication;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
@@ -72,8 +74,9 @@ public class MainActivity extends AppCompatActivity implements FragmentSignal.On
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        //.setAction("Action", null).show();
+                startActivity(new Intent(MainActivity.this, ActivityMyAccount.class));
             }
         });
 
