@@ -1,15 +1,15 @@
 package com.doctarhyf.myapplication.frags;
 
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.doctarhyf.myapplication.InsecSignal;
 import com.doctarhyf.myapplication.R;
 import com.doctarhyf.myapplication.frags.FragmentInsecHistory.OnListFragmentInteractionListener;
-import com.doctarhyf.myapplication.frags.dummy.DummyContent.InsecSignal;
 
 import java.util.List;
 

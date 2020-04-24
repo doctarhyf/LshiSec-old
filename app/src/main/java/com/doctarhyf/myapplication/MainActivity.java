@@ -9,7 +9,12 @@ import android.os.Bundle;
 import com.doctarhyf.myapplication.frags.FragmentMap;
 import com.doctarhyf.myapplication.frags.FragmentSignal;
 import com.doctarhyf.myapplication.frags.FragmentInsecHistory;
-import com.doctarhyf.myapplication.frags.dummy.DummyContent;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
@@ -28,7 +33,7 @@ import com.doctarhyf.myapplication.ui.main.AdapterSectionsPager;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
 public class MainActivity extends AppCompatActivity implements FragmentSignal.OnFragmentInteractionListener, FragmentInsecHistory.OnListFragmentInteractionListener,
-        FragmentMap.OnFragmentInteractionListener {
+        FragmentMap.OnFragmentInteractionListener, OnMapReadyCallback {
 
     private static final String TAG = "TAG";
     private TabLayout mTabs = null;
@@ -38,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements FragmentSignal.On
     //RxPermissions rxPermissions;
     String[] perms = new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE,
     Manifest.permission.CAMERA};
+    private GoogleMap mGoogleMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -200,8 +206,14 @@ public class MainActivity extends AppCompatActivity implements FragmentSignal.On
     }
 
     @Override
-    public void onInsecItemClicked(DummyContent.InsecSignal item) {
-        Log.e(TAG, "onInsecItemClicked: -> " + item.toString() );
+    public void onInsecItemClicked(InsecSignal item) {
+        //Log.e(TAG, "onInsecItemClicked: -> " + item.toString() );
+
+        Intent intent = new Intent(this, ActivityInsecItemDetails.class);
+        intent.putExtra(InsecSignal.KEY_INSEC_SIGNAL, item.toJSON());
+
+        startActivity(intent);
+
     }
 
     @Override
@@ -220,5 +232,19 @@ public class MainActivity extends AppCompatActivity implements FragmentSignal.On
         }
 
         Log.e(TAG, "onBackPressed: curfidx : " + mCurrentFragIdx + ", FRAG_MAP : " + AdapterSectionsPager.FRAG_MAP );
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mGoogleMap = googleMap;
+        mGoogleMap.setMyLocationEnabled(true);
+        // For dropping a marker at a point on the Map
+        LatLng sydney = mGpsTracker.getLatLng();
+        mGoogleMap.addMarker(new MarkerOptions().position(sydney).title("Marker Title").snippet("Marker Description"));
+        // For zooming automatically to the location of the marker
+        CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(16).build();
+        mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+
+
     }
 }

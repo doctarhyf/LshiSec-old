@@ -2,19 +2,16 @@ package com.doctarhyf.myapplication.frags;
 
 import android.content.Context;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.doctarhyf.myapplication.InsecSignal;
 import com.doctarhyf.myapplication.R;
 import com.doctarhyf.myapplication.frags.dummy.DummyContent;
-import com.doctarhyf.myapplication.frags.dummy.DummyContent.InsecSignal;
 
 /**
  * A fragment representing a list of Items.
