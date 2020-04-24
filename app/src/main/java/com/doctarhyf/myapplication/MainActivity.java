@@ -1,11 +1,9 @@
 package com.doctarhyf.myapplication;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 
 import com.doctarhyf.myapplication.frags.FragmentMap;
@@ -16,7 +14,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
-import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -27,7 +24,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.doctarhyf.myapplication.ui.main.SectionsPagerAdapter;
+import com.doctarhyf.myapplication.ui.main.AdapterSectionsPager;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
 public class MainActivity extends AppCompatActivity implements FragmentSignal.OnFragmentInteractionListener, FragmentInsecHistory.OnListFragmentInteractionListener,
@@ -55,7 +52,9 @@ public class MainActivity extends AppCompatActivity implements FragmentSignal.On
                 .subscribe(granted -> {
                     if (granted) { // Always true pre-M
 
-                        //mCameraPermsGranted = true;
+                        if(granted){
+                            Log.e(TAG, "onCreate: perms granted" );
+                        }
 
                     } else {
                         Log.e(TAG, "onCreate: perms refused " );
@@ -64,9 +63,9 @@ public class MainActivity extends AppCompatActivity implements FragmentSignal.On
 
 
 
-        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
+        AdapterSectionsPager adapterSectionsPager = new AdapterSectionsPager(this, getSupportFragmentManager());
         ViewPager viewPager = findViewById(R.id.view_pager);
-        viewPager.setAdapter(sectionsPagerAdapter);
+        viewPager.setAdapter(adapterSectionsPager);
         mTabs = findViewById(R.id.tabs);
         mTabs.setVisibility(View.GONE);
         mTabs.setupWithViewPager(viewPager);
@@ -76,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements FragmentSignal.On
             public void onTabSelected(TabLayout.Tab tab) {
                 mCurrentFragIdx = tab.getPosition();
                 Log.e(TAG, "onTabSelected: idx " + tab.getPosition() );
-                Log.e(TAG, "onBackPressed: curfidx : " + mCurrentFragIdx + ", FRAG_MAP : " + SectionsPagerAdapter.FRAG_MAP );
+                Log.e(TAG, "onBackPressed: curfidx : " + mCurrentFragIdx + ", FRAG_MAP : " + AdapterSectionsPager.FRAG_MAP );
             }
 
             @Override
@@ -104,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements FragmentSignal.On
         Window window = getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
-        showTab(SectionsPagerAdapter.FRAG_SIGNAL_INSEC);
+        showTab(AdapterSectionsPager.FRAG_SIGNAL_INSEC);
 
         mGpsTracker = new GPSTracker(this);
 
@@ -126,8 +125,8 @@ public class MainActivity extends AppCompatActivity implements FragmentSignal.On
     private int getStatusBarCol(int tabIdx) {
         int col = R.color.col_main_blue;
 
-        if(tabIdx == SectionsPagerAdapter.FRAG_HISTORY) col = R.color.col_grad_violet;
-        if(tabIdx == SectionsPagerAdapter.FRAG_SIGNAL_INSEC) col = R.color.col_main_blue;
+        if(tabIdx == AdapterSectionsPager.FRAG_HISTORY) col = R.color.col_grad_violet;
+        if(tabIdx == AdapterSectionsPager.FRAG_SIGNAL_INSEC) col = R.color.col_main_blue;
 
 
         return col;
@@ -214,12 +213,12 @@ public class MainActivity extends AppCompatActivity implements FragmentSignal.On
     public void onBackPressed() {
         //super.onBackPressed();
 
-        if(mCurrentFragIdx == SectionsPagerAdapter.FRAG_MAP){
-            showTab(SectionsPagerAdapter.FRAG_SIGNAL_INSEC);
+        if(mCurrentFragIdx == AdapterSectionsPager.FRAG_MAP){
+            showTab(AdapterSectionsPager.FRAG_SIGNAL_INSEC);
         }else{
             super.onBackPressed();
         }
 
-        Log.e(TAG, "onBackPressed: curfidx : " + mCurrentFragIdx + ", FRAG_MAP : " + SectionsPagerAdapter.FRAG_MAP );
+        Log.e(TAG, "onBackPressed: curfidx : " + mCurrentFragIdx + ", FRAG_MAP : " + AdapterSectionsPager.FRAG_MAP );
     }
 }

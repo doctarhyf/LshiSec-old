@@ -16,7 +16,7 @@ import android.widget.LinearLayout;
 
 import com.doctarhyf.myapplication.R;
 import com.doctarhyf.myapplication.Utils;
-import com.doctarhyf.myapplication.ui.main.SectionsPagerAdapter;
+import com.doctarhyf.myapplication.ui.main.AdapterSectionsPager;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -83,7 +83,7 @@ public class FragmentSignal extends Fragment {
             public void onClick(View v) {
 
                 Utils.PlayClickAnimation(getContext(), v, R.anim.zoom_animation, null);
-                mListener.onShowTabClicked(SectionsPagerAdapter.FRAG_HISTORY);
+                mListener.onShowTabClicked(AdapterSectionsPager.FRAG_HISTORY);
             }
         });
 
@@ -92,7 +92,7 @@ public class FragmentSignal extends Fragment {
             public void onClick(View v) {
 
                 Utils.PlayClickAnimation(getContext(), v, R.anim.zoom_animation, null);
-                mListener.onShowTabClicked(SectionsPagerAdapter.FRAG_MAP);
+                mListener.onShowTabClicked(AdapterSectionsPager.FRAG_MAP);
             }
         });
 

@@ -17,7 +17,7 @@ import com.doctarhyf.myapplication.frags.FragmentInsecHistory;
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
  * one of the sections/tabs/pages.
  */
-public class SectionsPagerAdapter extends FragmentPagerAdapter {
+public class AdapterSectionsPager extends FragmentPagerAdapter {
 
     @StringRes
     private static final int[] TAB_TITLES = new int[]{R.string.tab_text_history, R.string.tab_text_signal,
@@ -27,7 +27,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     public static final int FRAG_MAP = 2;
     private final Context mContext;
 
-    public SectionsPagerAdapter(Context context, FragmentManager fm) {
+    public AdapterSectionsPager(Context context, FragmentManager fm) {
         super(fm);
         mContext = context;
     }
