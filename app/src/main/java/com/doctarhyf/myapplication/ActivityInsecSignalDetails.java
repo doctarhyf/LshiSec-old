@@ -5,10 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.google.gson.Gson;
 
-public class ActivityInsecItemDetails extends AppCompatActivity {
+public class ActivityInsecSignalDetails extends AppCompatActivity {
 
     private static final String TAG = "TAG_INS";
 
@@ -17,6 +19,8 @@ public class ActivityInsecItemDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_insec_item_details);
 
+        Window window = getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
         Intent intent = getIntent();
 

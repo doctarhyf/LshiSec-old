@@ -4,6 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ActivityInsecItemDetails">
+    tools:context=".ActivityInsecSignalDetails"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/gradient_bg_insec_item_det"
+    >
+
+    <com.doctarhyf.myapplication.other.Speedometer
+        android:id="@+id/Speedometer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        custom:currentSpeed="100"
+        custom:maxSpeed="300"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

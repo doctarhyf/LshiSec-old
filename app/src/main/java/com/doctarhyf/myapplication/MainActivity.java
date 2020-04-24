@@ -209,7 +209,7 @@ public class MainActivity extends AppCompatActivity implements FragmentSignal.On
     public void onInsecItemClicked(InsecSignal item) {
         //Log.e(TAG, "onInsecItemClicked: -> " + item.toString() );
 
-        Intent intent = new Intent(this, ActivityInsecItemDetails.class);
+        Intent intent = new Intent(this, ActivityInsecSignalDetails.class);
         intent.putExtra(InsecSignal.KEY_INSEC_SIGNAL, item.toJSON());
 
         startActivity(intent);

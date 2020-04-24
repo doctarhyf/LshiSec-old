@@ -4,20 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:background="#000"
     tools:context=".ActivityMyAccount"
-    android:background="@drawable/gradient_bg_insec_item_det"
+
 
     >
 
 
-    <com.doctarhyf.myapplication.other.Speedometer
-        android:id="@+id/Speedometer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
 
-        custom:currentSpeed="100"
-        custom:maxSpeed="300"/>
 
 
 </FrameLayout>
