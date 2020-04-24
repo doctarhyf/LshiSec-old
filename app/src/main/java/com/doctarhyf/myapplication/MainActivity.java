@@ -1,5 +1,6 @@
 package com.doctarhyf.myapplication;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
@@ -27,6 +28,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.doctarhyf.myapplication.ui.main.SectionsPagerAdapter;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 
 public class MainActivity extends AppCompatActivity implements FragmentSignal.OnFragmentInteractionListener, FragmentInsecHistory.OnListFragmentInteractionListener,
         FragmentMap.OnFragmentInteractionListener {
@@ -35,6 +37,10 @@ public class MainActivity extends AppCompatActivity implements FragmentSignal.On
     private TabLayout mTabs = null;
     private int mCurrentFragIdx = -1;
     private View mRootView;
+    private GPSTracker mGpsTracker;
+    //RxPermissions rxPermissions;
+    String[] perms = new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE,
+    Manifest.permission.CAMERA};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +48,21 @@ public class MainActivity extends AppCompatActivity implements FragmentSignal.On
         setContentView(R.layout.activity_main);
 
         mRootView = findViewById(R.id.root);
+
+
+        new RxPermissions(this)
+                .request(perms)
+                .subscribe(granted -> {
+                    if (granted) { // Always true pre-M
+
+                        //mCameraPermsGranted = true;
+
+                    } else {
+                        Log.e(TAG, "onCreate: perms refused " );
+                    }
+                });
+
+
 
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
         ViewPager viewPager = findViewById(R.id.view_pager);
@@ -84,6 +105,9 @@ public class MainActivity extends AppCompatActivity implements FragmentSignal.On
         window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
         showTab(SectionsPagerAdapter.FRAG_SIGNAL_INSEC);
+
+        mGpsTracker = new GPSTracker(this);
+
     }
     public void showTab(int tabIdx){
         new Handler().postDelayed(
