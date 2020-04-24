@@ -38,8 +38,8 @@ public class AdapterInsecSignal extends RecyclerView.Adapter<AdapterInsecSignal.
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mInsecSignalList.get(position);
-        holder.mIdView.setText(mInsecSignalList.get(position).id);
-        holder.mContentView.setText(mInsecSignalList.get(position).content);
+        holder.mIdView.setText(mInsecSignalList.get(position).getUID());
+        holder.mContentView.setText(mInsecSignalList.get(position).latLng() + "");
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override

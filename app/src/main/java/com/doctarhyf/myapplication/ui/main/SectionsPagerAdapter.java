@@ -38,7 +38,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         switch (position){
             case FRAG_HISTORY:
-                fragment = FragmentInsecHistory.newInstance(1);
+                fragment = FragmentInsecHistory.newInstance();
                 break;
 
             case FRAG_SIGNAL_INSEC:

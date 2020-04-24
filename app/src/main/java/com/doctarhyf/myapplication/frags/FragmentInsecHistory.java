@@ -25,9 +25,9 @@ import com.doctarhyf.myapplication.frags.dummy.DummyContent.InsecSignal;
 public class FragmentInsecHistory extends Fragment {
 
     // TODO: Customize parameter argument names
-    private static final String ARG_COLUMN_COUNT = "column-count";
+    //private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
-    private int mColumnCount = 1;
+    //private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
 
     /**
@@ -39,10 +39,10 @@ public class FragmentInsecHistory extends Fragment {
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static FragmentInsecHistory newInstance(int columnCount) {
+    public static FragmentInsecHistory newInstance(){//int columnCount) {
         FragmentInsecHistory fragment = new FragmentInsecHistory();
         Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
+        //'args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
         return fragment;
     }
@@ -52,7 +52,7 @@ public class FragmentInsecHistory extends Fragment {
         super.onCreate(savedInstanceState);
 
         if (getArguments() != null) {
-            mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
+            //mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
     }
 
@@ -60,18 +60,18 @@ public class FragmentInsecHistory extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_insec_history, container, false);
-
+        RecyclerView recyclerView = view.findViewById(R.id.list);
         // Set the adapter
-        if (view instanceof RecyclerView) {
+        //if (view instanceof RecyclerView) {
             Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
+            //RecyclerView recyclerView = (RecyclerView) view;
+            /*if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-            }
+            }*/
             recyclerView.setAdapter(new AdapterInsecSignal(DummyContent.ITEMS, mListener));
-        }
+        //}
         return view;
     }
 

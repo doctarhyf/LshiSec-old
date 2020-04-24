@@ -1,16 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    android:background="@drawable/gradient_bg_insec_history"
+    >
+
+
+    <androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/list"
     android:name="com.doctarhyf.myapplication.frags.InsecSignalFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
+
     app:layoutManager="LinearLayoutManager"
     tools:context=".frags.FragmentInsecHistory"
     tools:listitem="@layout/layout_item_insec_signal"
     android:paddingTop="@dimen/default_top_padding"
-    android:background="@drawable/gradient_bg_insec_history"
+
     />
+
+</FrameLayout>
